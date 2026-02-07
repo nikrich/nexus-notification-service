@@ -3,6 +3,7 @@ import 'express-async-errors';
 import Database from 'better-sqlite3';
 import { initializeDatabase } from './db/schema.js';
 import healthRoutes from './routes/health.routes.js';
+import notificationsRoutes from './routes/notifications.routes.js';
 import { errorMiddleware } from './middleware/error.middleware.js';
 
 export interface AppOptions {
@@ -24,6 +25,7 @@ export function createApp(options: AppOptions = {}): { app: express.Express; db:
 
   // Routes
   app.use(healthRoutes);
+  app.use(notificationsRoutes);
 
   // Error handler (must be last)
   app.use(errorMiddleware);
