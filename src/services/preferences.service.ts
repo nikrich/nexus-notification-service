@@ -28,14 +28,24 @@ interface PreferencesRow {
   task_due_soon: string;
 }
 
+function safeParseChannels(json: string, fallback: NotificationChannel[]): NotificationChannel[] {
+  try {
+    const parsed = JSON.parse(json);
+    if (Array.isArray(parsed)) return parsed;
+    return fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 function rowToPreferences(row: PreferencesRow): NotificationPreferences {
   return {
     userId: row.user_id,
-    taskAssigned: JSON.parse(row.task_assigned),
-    taskStatusChanged: JSON.parse(row.task_status_changed),
-    commentAdded: JSON.parse(row.comment_added),
-    projectInvited: JSON.parse(row.project_invited),
-    taskDueSoon: JSON.parse(row.task_due_soon),
+    taskAssigned: safeParseChannels(row.task_assigned, DEFAULT_PREFERENCES.taskAssigned),
+    taskStatusChanged: safeParseChannels(row.task_status_changed, DEFAULT_PREFERENCES.taskStatusChanged),
+    commentAdded: safeParseChannels(row.comment_added, DEFAULT_PREFERENCES.commentAdded),
+    projectInvited: safeParseChannels(row.project_invited, DEFAULT_PREFERENCES.projectInvited),
+    taskDueSoon: safeParseChannels(row.task_due_soon, DEFAULT_PREFERENCES.taskDueSoon),
   };
 }
 
