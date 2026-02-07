@@ -5,6 +5,7 @@ import { initializeDatabase } from './db/schema.js';
 import healthRoutes from './routes/health.routes.js';
 import notificationsRoutes from './routes/notifications.routes.js';
 import preferencesRoutes from './routes/preferences.routes.js';
+import webhooksRoutes from './routes/webhooks.routes.js';
 import { errorMiddleware } from './middleware/error.middleware.js';
 
 export interface AppOptions {
@@ -28,6 +29,7 @@ export function createApp(options: AppOptions = {}): { app: express.Express; db:
   app.use(healthRoutes);
   app.use(notificationsRoutes);
   app.use(preferencesRoutes);
+  app.use(webhooksRoutes);
 
   // Error handler (must be last)
   app.use(errorMiddleware);
