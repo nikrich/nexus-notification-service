@@ -1,0 +1,33 @@
+{
+  "name": "@nexus/notification-service",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src/index.ts --format esm --dts",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
+    "better-sqlite3": "^11.0.0",
+    "nanoid": "^5.0.0",
+    "zod": "^3.23.0",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "vitest": "^2.0.0",
+    "supertest": "^7.0.0",
+    "@types/express": "^4.17.0",
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/supertest": "^6.0.0"
+  }
+}
